@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>业绩查询明细列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/performanceQuery/performanceQueryList.css" />
+    <script src="../../js/zepto.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/jquery-1.10.2.js"></script>
+    <script src="../../js/iscroll-probe.js"></script>
+</head>
+<!--点击#main里div跳转至performanceQueryDetails.html-->
+<body onload="loaded()">
+<header>
+    <div id="back">
+        <img src="../../images/back.png" id="backImg">
+    </div>
+    <h1>业绩查询明细</h1>
+    <select id="changeUser">
+    </select>
+</header>
+<article>
+    <div id="main">
+        <div id="mainDiv">
+            <div id="wrapper">
+                <div id="scroller">
+
+                    <ul></ul>
+                    <div class="pullUp"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div id="error" style="text-align:center;display:none;color:red">
+                       网络错误！
+    </div>
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="../../images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="../../images/marketing_on.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="../../images/myself_off.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script type="text/javascript">
+
+    var items_per_page = 10;
+    var scroll_in_progress = false;
+    var myScroll;
+    var ticket=localStorage.getItem("ticket");
+    var deviceId=localStorage.getItem("deviceId");
+    var query_date=getQueryStringByName("query_date");
+    var first_active_flag=getQueryStringByName("first_active_flag");
+    var role_id=getQueryStringByName("role_id");
+    var page_num=1;
+    var page_size='10';
+    $('#index').click(function () {
+        self.location='../../index.html';
+    });
+    $('#marketing').click(function () {
+        self.location='../../marketing.html';
+    });
+    $('#myself').click(function () {
+        self.location='../../myself.html';
+    });
+    $('#backImg').click(function () {
+        self.location='performanceQuery.html';
+    });
+
+        load_content = function (refresh, data) {
+           var next_page = '';
+          //  if (data && data.page_num) {
+          //     next_page = data.page_num;
+          //  }
+            var info = queryPerformanceInfo(data);
+            console.log(refresh, next_page);
+            setTimeout(function () { // This immitates the CALLBACK of your AJAX function
+                if (!refresh && info.status=='1') {
+                    // Loading the initial content
+                    for(var i=0;i<info.data.rows.length;i++)
+                    $("#wrapper > #scroller > ul").append('<li class="credit"><div class="childDiv"><div class="issuingDate"><p class="leftP">产品名称：</p><p class="productName">' + info.data.rows[i].PRODUCT_NAME +
+                            '</p></div><div class="issuingDate"><p class="leftP">客户姓名：</p><p class="clientName">' + info.data.rows[i].CLIENT_NAME +
+                            '</p></div><div class="issuingDate"><p class="leftP">发卡日期：</p><p class="ddDate">' + info.data.rows[i].DD_DATE +
+                            '</p></div><div class="issuingDate"><p class="leftP">是否销售新户：</p><p class="newUsers">' + info.data.rows[i].CLIENT_OLD_NEW_FLAG +
+                            '</p></div><div style="display:none"><span class="mobile">' + info.data.rows[i].MOBILE +
+                            '</span><span class="zfcard">' + info.data.rows[i].MA_SLA_CARD_FLAG +
+                            '</span><span class="appdate">' + info.data.rows[i].APP_DATE + '</span><span class="cardactday">' + info.data.rows[i].CARD_ACT_DAY +
+                            '</span><span class="firstdate">' + info.data.rows[i].FIRST_TRAN_DATE +
+                            '</span><span class="cancelldate">' + info.data.rows[i].CANCELL_DATE +
+                            '</span></div><a><img src="../../images/go.png"></a></div></li>');
+                } else if (refresh && info.status=='1') {
+                    // Loading the next-page content and refreshing
+
+                    for (var n = 0; n < info.data.rows.length; n++) {
+                        $("#wrapper > #scroller > ul").append('<li class="credit"><div class="childDiv"><div class="issuingDate"><p class="leftP">产品名称：</p><p class="productName">' + info.data.rows[n].PRODUCT_NAME +
+                                '</p></div><div class="issuingDate"><p class="leftP">客户姓名：</p><p class="clientName">' + info.data.rows[n].CLIENT_NAME +
+                                '</p></div><div class="issuingDate"><p class="leftP">发卡日期：</p><p class="ddDate">' + info.data.rows[n].DD_DATE +
+                                '</p></div><div class="issuingDate"><p class="leftP">是否销售新户：</p><p class="newUsers">' + info.data.rows[n].CLIENT_OLD_NEW_FLAG +
+                                '</p></div><div style="display:none"><span class="mobile">' + info.data.rows[n].MOBILE +
+                                '</span><span class="zfcard">' + info.data.rows[n].MA_SLA_CARD_FLAG +
+                                '</span><span class="appdate">' + info.data.rows[n].APP_DATE + '</span><span class="cardactday">' + info.data.rows[n].CARD_ACT_DAY +
+                                '</span><span class="firstdate">' + info.data.rows[n].FIRST_TRAN_DATE +
+                                '</span><span class="cancelldate">' + info.data.rows[n].CANCELL_DATE +
+                                '</span></div><a><img src="../../images/go.png"></a></div></li>');
+                    }
+                    }
+                    var li = $("#wrapper #scroller ul .credit");
+                    for (var i = 0; i < li.length; i++) {
+                            li[i].addEventListener('click', function () {
+                                var productName = $(this).find(".productName").html();
+                                var clientName = $(this).find(".clientName").html();
+                                var ddDate = $(this).find(".ddDate").html();
+                                var newUsers = $(this).find(".newUsers").html();
+                                var zfcard = $(this).find(".zfcard").html();
+                                var appdate = $(this).find(".appdate").html();
+                                var cardactday = $(this).find(".cardactday").html();
+                                var firstdate = $(this).find(".firstdate").html();
+                                var cancelldate = $(this).find(".cancelldate").html();
+                                var mobile = $(this).find(".mobile").html();
+                                self.location = 'performanceQueryDetails.html?clientName=' + clientName
+                                        + "&productName=" + productName + "&ddDate=" + ddDate + "&newUsers=" + newUsers +
+                                        "&zfcard=" + zfcard + "&appdate=" + appdate + "&cardactday=" + cardactday +
+                                        "&firstdate=" + firstdate + "&cancelldate=" + cancelldate + "&mobile=" + mobile;
+                                console.log($(this).find(".clientName").html());
+                            });
+                    }
+//                    }for (var i = 0; i < li.length; i++) {
+//                        (function (Index) {
+//                            li[i].addEventListener('click', function (e) {
+//                                var productName = $(this).find(".productName").html();
+//                                var clientName = $(this).find(".clientName").html();
+//                                var ddDate = $(this).find(".ddDate").html();
+//                                var newUsers = $(this).find(".newUsers").html();
+//                                var zfcard = $(this).find(".zfcard").html();
+//                                var appdate = $(this).find(".appdate").html();
+//                                var cardactday = $(this).find(".cardactday").html();
+//                                var firstdate = $(this).find(".firstdate").html();
+//                                var cancelldate = $(this).find(".cancelldate").html();
+//                                var mobile = $(this).find(".mobile").html();
+//                                self.location = 'performanceQueryDetails.html?clientName=' + clientName
+//                                        + "&productName=" + productName + "&ddDate=" + ddDate + "&newUsers=" + newUsers +
+//                                        "&zfcard=" + zfcard + "&appdate=" + appdate + "&cardactday=" + cardactday +
+//                                        "&firstdate=" + firstdate+ "&cancelldate=" + cancelldate+ "&mobile=" + mobile;
+//                                console.log($(this).find(".clientName").html());
+//                            }, false);
+//                        })(i)
+//                    }
+
+
+                if (refresh) {
+
+                    myScroll.refresh();
+                    pullActionCallback();
+
+                } else {
+
+                    if (myScroll) {
+                        myScroll.destroy();
+                        $(myScroll.scroller).attr('style', ''); // Required since the styles applied by IScroll might conflict with transitions of parent layers.
+                        myScroll = null;
+                    }
+                    trigger_myScroll();
+
+                }
+            }, 1000);
+
+        };
+
+        function pullDownAction() {
+            var request = {
+                "ticket":ticket,
+                "deviceId":deviceId,
+                "role_id":role_id,
+                "query_date":query_date,
+                "first_active_flag":first_active_flag,
+                "page_num":page_num+1,
+                "page_size":'10'
+            };
+            load_content('refresh',request);
+            $('#wrapper > #scroller > ul').data('page', 1);
+
+            // Since "topOffset" is not supported with iscroll-5
+            $('#wrapper > .scroller').css({top: 0});
+
+        }
+
+        function pullUpAction(callback) {
+            if ($('#wrapper > #scroller > ul').data('page')) {
+                var next_page = parseInt($('#wrapper > #scroller > ul').data('page'), 10) + 1;
+            } else {
+                var next_page = 2;
+            }
+            var request = {
+                ticket: 123,
+                page_num: next_page
+            }
+            load_content('refresh', request);
+            $('#wrapper > #scroller > ul').data('page', next_page);
+
+            if (callback) {
+                callback();
+            }
+        }
+
+        function pullActionCallback() {
+            if (pullDownEl && pullDownEl.className.match('loading')) {
+
+                pullDownEl.className = 'pullDown';
+                pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh';
+
+                myScroll.scrollTo(0, parseInt(pullUpOffset) * (-1), 200);
+
+            } else if (pullUpEl && pullUpEl.className.match('loading')) {
+
+                $('.pullUp').removeClass('loading').html('');
+
+            }
+        }
+
+        var pullActionDetect = {
+            count: 0,
+            limit: 10,
+            check: function (count) {
+                if (count) {
+                    pullActionDetect.count = 0;
+                }
+                // Detects whether the momentum has stopped, and if it has reached the end - 200px of the scroller - it trigger the pullUpAction
+                setTimeout(function () {
+                    if (myScroll.y <= (myScroll.maxScrollY + 200) && pullUpEl && !pullUpEl.className.match('loading')) {
+                        $('.pullUp').addClass('loading').html('<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel">Loading...</span>');
+                        pullUpAction();
+                    } else if (pullActionDetect.count < pullActionDetect.limit) {
+                        pullActionDetect.check();
+                        pullActionDetect.count++;
+                    }
+                }, 200);
+            }
+        }
+
+        function trigger_myScroll(offset) {
+            pullDownEl = document.querySelector('#wrapper .pullDown');
+            if (pullDownEl) {
+                pullDownOffset = pullDownEl.offsetHeight;
+            } else {
+                pullDownOffset = 0;
+            }
+            pullUpEl = document.querySelector('#wrapper .pullUp');
+            if (pullUpEl) {
+                pullUpOffset = pullUpEl.offsetHeight;
+            } else {
+                pullUpOffset = 0;
+            }
+
+            if ($('#wrapper ul > li').length < items_per_page) {
+                // If we have only 1 page of result - we hide the pullup and pulldown indicators.
+                $('#wrapper .pullDown').hide();
+                $('#wrapper .pullUp span').hide();
+                offset = 0;
+            } else if (!offset) {
+                // If we have more than 1 page of results and offset is not manually defined - we set it to be the pullUpOffset.
+                offset = pullUpOffset;
+            }
+
+            myScroll = new IScroll('#wrapper', {
+                probeType: 1,
+                tap: true,
+                click: false,
+                preventDefaultException: {tagName: /.*/},
+                mouseWheel: true,
+                scrollbars: true,
+                fadeScrollbars: true,
+                interactiveScrollbars: false,
+                keyBindings: false,
+                deceleration: 0.0002,
+                startY: (parseInt(offset) * (-1))
+            });
+
+            myScroll.on('scrollStart', function () {
+                scroll_in_progress = true;
+            });
+            myScroll.on('scroll', function () {
+
+                scroll_in_progress = true;
+
+                if ($('#wrapper ul > li').length >= items_per_page) {
+                    if (this.y >= 5 && pullDownEl && !pullDownEl.className.match('flip')) {
+                        pullDownEl.className = 'pullDown flip';
+                        pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh';
+                        this.minScrollY = 0;
+                    } else if (this.y <= 5 && pullDownEl && pullDownEl.className.match('flip')) {
+                        pullDownEl.className = 'pullDown';
+                        pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh';
+                        this.minScrollY = -pullDownOffset;
+                    }
+
+                    console.log(this.y);
+                    pullActionDetect.check(0);
+
+                }
+            });
+            myScroll.on('scrollEnd', function () {
+                console.log('scroll ended');
+                setTimeout(function () {
+                    scroll_in_progress = false;
+                }, 100);
+                if ($('#wrapper ul > li').length >= items_per_page) {
+                    if (pullDownEl && pullDownEl.className.match('flip')) {
+                        pullDownEl.className = 'pullDown loading';
+                        pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
+                        pullDownAction();
+                    }
+                    // We let the momentum scroll finish, and if reached the end - loading the next page
+                    pullActionDetect.check(0);
+                }
+            });
+
+            // In order to prevent seeing the "pull down to refresh" before the iScoll is trigger - the wrapper is located at left:-9999px and returned to left:0 after the iScoll is initiated
+            setTimeout(function () {
+                $('#wrapper').css({left: 0});
+            }, 100);
+        }
+
+      function loaded() {
+            var data={
+                "ticket":ticket,
+                "deviceId":deviceId,
+                "role_id":role_id,
+                "query_date":query_date,
+                "first_active_flag":first_active_flag,
+                "page_num":page_num,
+                "page_size":'10'
+            };
+            load_content('',data);
+
+        }
+
+        document.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, false);
+
+        function queryPerformanceInfo(date) {
+
+            var response = '';
+            $.ajax({
+                url:"http://iclient-app-u1.pingan.com.cn:9080/iclientapp/CreditCardForBankerA/checkAchievementList?",
+                dataType: 'json',
+                data: date,
+                type: "post",
+                async: false,
+                success: function (data) {
+                    if(data.status=='1')
+                    response = data;
+                    else {
+                        return;
+                    }
+                },
+                error: function () {
+
+
+                }
+            });
+            return response;
+        }
+
+
+
+</script>
+
+<style type="text/css">
+
+</style>
+
+</body>
+</html>

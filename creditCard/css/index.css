@@ -1,0 +1,59 @@
+#mainBox,#mainBoxTop,#mainBoxBottom{
+    width: 100%;
+}
+#mainBox{
+    margin: 0.5rem 0;
+    height: 14rem;
+    border-bottom: 1px #cccccc solid;
+    border-top: 1px #cccccc solid;
+}
+.goDiv{
+    width: 33.1%;
+    float: left;
+    height: 4rem;
+    padding: 1.5rem 0;
+    text-align: center;
+}
+.borderBottom{
+    border-bottom: 1px solid #cccccc;
+}
+.borderRight{
+    border-right: 1px solid #cccccc;
+}
+
+#customerCard, #querySchedule, #performanceQuery, #statisticalQuery, #creditCardApp, #qrCode{
+    /*display: none;*/
+}
+.swiper-container {
+    width: 100%;
+    height: 30%;
+
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.swiper-slide img{
+    width: 100%;
+}
+#index{
+    color: skyblue;
+}
+.mainImg{
+    width: 30%;
+}

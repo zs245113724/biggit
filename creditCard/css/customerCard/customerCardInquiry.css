@@ -1,0 +1,23 @@
+#customerTable{width: 100%;}
+#customerTable tr{
+    width:100%;
+    text-align: center;
+    line-height: 3rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eeeeee;
+    display: inline-block;
+}
+#customerTable tr td{
+    display: inline-block;
+    width: 21%;
+}
+#customerTable tr .customerTd{
+    width: 50%;
+    word-wrap:break-word;
+}
+#customerTr{
+    color: #aaaaaa;
+}
+#marketing{
+    color: skyblue;
+}

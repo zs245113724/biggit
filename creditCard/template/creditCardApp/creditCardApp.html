@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>信用卡APP</title>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/creditCardApp/creditCardApp.css" />
+    <script src="../../js/zepto.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <!--   <script src="../../js/aladdin.min.js"></script>
+      <script src="../../js/aladdin.aikeplatform.js">  -->
+
+
+</head>
+<body>
+<header>
+    <div id="back">
+        <img src="../../images/back.png" id="backImg">
+    </div>
+    <h1>信用卡APP</h1>
+    <select id="changeUser">
+    </select>
+</header>
+<article>
+    <div id="main">
+        <div class="boxClear">
+            <span class="check" id="errorPhone">请检查手机号码</span>
+            <input type="text" id="phoneNumber" placeholder="请输入手机号码" maxlength="11">
+            <img src="../../images/clear.png" alt="" id="clear">
+            <button id="query">查询</button>
+        </div>
+    </div>
+    <span class="color"></span>
+    <div id="queryResults">
+    </div>
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="../../images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="../../images/marketing_on.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="../../images/myself_off.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    //加载页面
+    ;(function($){
+        //查询
+        $('#query').on('click',function (e) {
+            phoneNumber();
+        });
+        $('#index').click(function () {
+            self.location='../../index.html';
+        });
+        $('#marketing').click(function () {
+            self.location='../../marketing.html';
+        });
+        $('#myself').click(function () {
+            self.location='../../myself.html';
+        });
+        //跳转到首页
+        $('#back img').on('click',function (e) {
+            self.location='../../marketing.html';
+        });
+        //重置手机号码
+        $('#clear').on('click',function (e) {
+            location.reload();
+        });
+        //对信息进行校验
+        function phoneNumber() {
+            //获取
+            var custTel=document.getElementById('phoneNumber').value;
+            var errorPhone=document.getElementById('errorPhone');
+            var reg = /^1\d{10}$/;
+            if(custTel==""||reg.test(custTel)==false){
+                errorPhone.style.opacity='1';
+                setTimeout("errorPhone.style.opacity='0'",4000);
+                return false;
+            }else {
+                //ajax数据请求
+                var date={
+                    "custTel":custTel
+                };
+                $.ajax({
+                    url:"http://iclient-app-u1.pingan.com.cn:9080/iclientapp/CreditCardForBankerA/checkRegisterCredit?",
+                    dataType: 'json',
+                    data : date,
+                    type:"post",
+                    success: function(data) {
+                        if(data.status=='1')
+                        {
+                            if(data.data.registerFlag=='1')
+                                data.data.registerFlag="已注册";
+                            else
+                                data.data.registerFlag="未注册";
+
+                            if(data.data.userType=='1')
+                                data.data.userType="已绑卡";
+                            else
+                                data.data.userType="未绑卡";
+                            var str="";
+                            str+='<ul><li>查询结果</li><li>';
+                            str+='<div class="left">注册信用卡APP</div>';
+                            str+='<div class="right">';
+                            str+=data.data.registerFlag;
+                            str+='</div></li><li><div class="left">';
+                            str+='注册信用卡APP日期</div><div class="right">';
+                            str+=data.data.createdDate;
+                            str+='</div></li><li><div class="left">';
+                            str+='绑卡</div><div class="right">';
+                            str+='</td><td>';
+                            str+=data.data.userType;
+                            str+='</div></li></ul>';
+                            $("#queryResults").html(str);
+                        }
+                        else
+                        {
+                        }
+                    },
+                    error:function(){
+                        alert("请求失败");
+                    }
+                });
+            }
+            var queryResults = document.getElementById('queryResults');
+            queryResults.style.opacity = '1';
+        }
+    })(Zepto)
+
+
+</script>
+</body>
+</html>

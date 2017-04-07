@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>信用卡E行销</title>
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/myself.css">
+    <script src="js/zepto.min.js"></script>
+    <script src="js/aladdin.min.js"></script>
+    <script src="js/aladdin.aikeplatform.js"></script>
+
+
+</head>
+<body>
+
+<header>
+    <h1>我的</h1>
+</header>
+
+<article>
+    <div id="main">
+        <div class="goDiv" id="qrCode">
+            <p>我的二维码</p>
+            <img src="images/go.png" class="go">
+        </div>
+        <div class="goDiv" id="install">
+            <p>设置</p>
+            <img src="images/go.png" class="go">
+        </div>
+        <div class="goDiv" id="portal">
+            <p>传送门</p>
+            <img src="images/go.png" class="go">
+        </div>
+    </div>
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="images/marketing_off.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="images/myself_on.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    ;(function($){
+        $('#customerCard').on('click',function (e) {
+            self.location='./template/customerCard/customerCard.html';
+        });
+        $('#querySchedule').on('click',function (e) {
+            self.location='./template/querySchedule/querySchedule.html';
+        });
+        $('#performanceQuery').on('click',function (e) {
+            self.location='./template/performanceQuery/performanceQuery.html';
+        });
+        $('#statisticalQuery').on('click',function (e) {
+            self.location='./template/statisticalQuery/statisticalQuery.html';
+        })
+        $('#creditCardApp').on('click',function (e) {
+            self.location='./template/creditCardApp/creditCardApp.html';
+        });
+        $('#qrCode').on('click',function (e) {
+            self.location='./template/qrCode/qrCode.html';
+        });
+        $('#install').on('click',function (e) {
+            aladdin.aike_modulemanager.showSettingModule();
+        });
+        $('#portal').on('click',function (e) {
+            aladdin.aike_modulemanager.showAikeMarketPortal('creditCard');
+        });
+
+    })(Zepto);
+
+
+    function getUser(user) {
+        for (var i = 0; i < user.length; i++) {
+
+            if (user[i] == '90900019') {
+                $('#customerCard').css({display: 'block'});
+                $('#creditCardApp').css({display: 'block'});
+            }
+            else if (user[i] == '90900018') {
+                $('#customerCard').css({display: 'block'});
+                $('#creditCardApp').css({display: 'block'});
+            }
+            else if (user[i] == '90900013') {
+
+                $('#customerCard').css({display: 'block'});
+                $('#creditCardApp').css({display: 'block'});
+                $('#qrCode').css({display: 'block'});
+            } else if (user[i] == '90900012') {
+                $('#customerCard').css({display: 'block'});
+                $('#querySchedule').css({display: 'block'});
+                $('#performanceQuery').css({display: 'block'});
+                $('#statisticalQuery').css({display: 'block'});
+                $('#creditCardApp').css({display: 'block'});
+                $('#qrCode').css({display: 'block'});
+            }
+        }
+    }
+    $(document).ready(function (){
+        aladdin.aike_tool.getTicketAndDeviceId(
+                function (ticket,deviceId) {
+                    window.localStorage.setItem("ticket",ticket);
+                    window.localStorage.setItem("deviceId",deviceId);
+                }
+        );
+
+        //从行员A获取ticket、设备号，存到localStorage
+        var ticket=window.localStorage.getItem("ticket");
+        var deviceId=window.localStorage.getItem('deviceId');
+        //带着ticket及设备ID请求爱客,返回用户角色
+        var date={
+            "ticket":ticket,
+            "deviceId":deviceId
+        };
+        console.log(date.ticket+":"+date.deviceId);
+        $.ajax({
+            url:"http://iclient-app-u1.pingan.com.cn:9080/iclientapp/CreditCardForBankerA/UserRoleQuery?",
+            dataType: 'json',
+            data : date,
+            type:"post",
+            success: function(data) {
+                //返回数据成功
+                if(data.status=='1')
+                {
+                    var roles=new Array();
+                    for(var n=0;n<data.data.length;n++) {
+                        //alert(data.data[n].roleId);
+                        roles[n] = data.data[n].roleId;
+                    }
+                    getUser(roles);
+                    window.localStorage.setItem('roles',roles);
+                }
+                else
+                {
+                    retrun;
+                }
+            },
+            error:function(){
+                alert("请求失败");
+                retrun;
+            }
+        });
+        $('#index').click(function () {
+            self.location='./index.html';
+        });
+        $('#marketing').click(function () {
+            self.location='./marketing.html';
+        });
+        $('#myself').click(function () {
+
+        });
+        $('#back img').on('click',function (e) {
+            self.location='./index.html';
+        })
+
+    });
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+header{
+    background-color: #fff;
+}
+article .title{
+    background-color: #eee;
+}
+article .title ul{
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+}
+article .title ul li{
+    float: left;
+    font-size: 1rem;
+    line-height:2rem;
+}
+article .content ul li{
+    height:1.6rem;
+    border-bottom: 1px solid #fafafa;
+}
+article .page{
+    line-height:3rem;
+    text-align: center;
+}
+article .page p{
+    display: inline-block;
+}
+article .page .left{
+    border-right:1rem solid #aaa;
+    border-top:.6rem solid transparent;
+    border-bottom:.6rem solid transparent;
+    border-radius: .2rem;
+    margin-right: .3rem;
+}
+article .page .right{
+    border-left:1rem solid #aaa;
+    border-top:.6rem solid transparent;
+    border-bottom:.6rem solid transparent;
+    border-radius: .2rem;
+}
+article .page span{
+    display: inline-block;
+    vertical-align: middle;
+}

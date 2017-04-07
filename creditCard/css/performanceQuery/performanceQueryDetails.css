@@ -1,0 +1,60 @@
+#main div{
+    border-bottom: 1px solid #eeeeee;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin: 0 0.5rem;
+    padding: 1rem 0;
+
+}
+#phone{
+    vertical-align: middle;
+}
+#main div p{
+    float: left;
+    color: #aaaaaa;
+}
+#main div h4{
+    float: right;
+    text-align: center;
+}
+article ul{
+    margin: 2rem 0 0 10%;
+}
+article ul li{
+line-height: 3rem;
+}
+article ul li div{
+    display: inline-block;width: 2rem;
+    vertical-align: middle;
+    position: relative;
+}
+.ok{
+    height: 3rem;width: 0px;border-left: 1px solid skyblue;
+    position: absolute;top: 0.9rem;left: 50%;
+}
+.ok_now{
+    height: 1.5rem;width: 0px;border-left: 1px solid skyblue;
+    position: absolute;top: 0.9rem;left: 50%;
+}
+.now_no{
+    height: 1.5rem;width: 0px;border-left: 1px solid #aaaaaa;
+    position: absolute;top: 2.15rem;left: 50%;
+}
+.no_no{
+    height: 3rem;width: 0px;border-left: 1px solid #aaaaaa;
+    position: absolute;top: 0.9rem;left: 50%;
+}
+article ul li div img{
+    display: block;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+article ul li p{
+    display: inline-block;
+}
+#marketing{
+    color: skyblue;
+}
+#style4{
+    border: 0;
+}

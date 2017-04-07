@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>二维码</title>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css" />
+    <style>
+        #myself{
+            color: skyblue;
+        }
+    </style>
+    <script src="../../js/zepto.min.js"></script>
+    <script src="../../js/aladdin.min.js"></script>
+    <script src="../../js/aladdin.aikeplatform.js"></script>
+    <script src="../../js/qrcode.js"></script>
+    <script>
+        $(document).ready(function () {
+            //从行员A获取ticket、设备号，存到localStorage
+            var ticket = window.localStorage.getItem("ticket");
+            var deviceId = window.localStorage.getItem("deviceId");
+            //带着ticket及设备ID请求爱客,返回用户角色
+            var date = {
+                "ticket": ticket,
+                "deviceId": deviceId
+            };
+            $.ajax({
+                url: "http://iclient-app-u1.pingan.com.cn:9080/iclientapp/CreditCardForBankerA/QRCodeQuery?",
+                dataType: 'json',
+                data: date,
+                type: "post",
+                success: function (data) {
+                    var url;
+                    //返回数据成功
+                    if (data.status == '1') {
+                        //生成二维码的url
+                        url = data.data.url + "UNIQUE_FLAG=" + data.data.flagOnly;
+                        //生成二维码
+                        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                            width: 160,//设置宽高
+                            height: 160
+                        });
+                        qrcode.makeCode(url);
+                    } else {
+                        alert("生成二维码异常");
+                    }
+                },
+                error: function () {
+                    alert("请求异常");
+                }
+            });
+        });
+    </script>
+    <style type="text/css">
+        #qrcode{
+            padding-top: 5rem;
+            width: 100%;
+            text-align: center;
+        }
+        #qrcode img{
+            width: 60%;
+            height: 40%;
+            margin: 0 auto;
+        }
+        #main p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div id="back">
+        <img src="../../images/back.png" id="backImg">
+    </div>
+    <h1>我的二维码</h1>
+</header>
+
+<article>
+    <div id="main">
+        <div id="qrcode">
+        </div>
+        <p>扫一扫上面二维码，去办信用卡啦！</p>
+    </div>
+
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="../../images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="../../images/marketing_off.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="../../images/myself_on.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    //加载页面
+    ;(function($){
+        //跳转到首页
+        $('#back img').on('click',function (e) {
+            self.location='../../myself.html';
+        });
+        $('#index').click(function () {
+            self.location='../../index.html';
+        });
+        $('#marketing').click(function () {
+            self.location='../../marketing.html';
+        });
+        $('#myself').click(function () {
+            self.location='../../myself.html';
+        });
+    })(Zepto)
+
+</script>
+</body>
+</html>

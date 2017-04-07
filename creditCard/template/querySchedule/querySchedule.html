@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>信用卡进度查询</title>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/querySchedule/querySchedule.css" />
+     <script src="../../js/zepto.min.js"></script>
+     <script src="../../js/common.js"></script>
+     <script src="../../js/aladdin.min.js"></script>
+     <script src="../../js/aladdin.aikeplatform.js"></script>
+</head>
+<body>
+<header>
+    <div id="back">
+        <img src="../../images/back.png" id="backImg">
+    </div>
+    <h1>信用卡进度</h1>
+    <select id="changeUser">
+    </select>
+</header>
+
+<article>
+    <div id="main">
+        <div>
+            <p><span>*</span>扫描录入开始日期</p>
+            <input type="date" id="entryStartDate" min="2000-01-01">
+        </div>
+        <div>
+            <p><span>*</span>扫描录入结束日期</p>
+            <span class="check" id="errorDateOne">请检查录入日期</span>
+            <input type="date" id="entryEndDate" min="2000-01-01">
+        </div>
+        <div>
+            <p><span>*</span>收件开始日期</p>
+            <input type="date" id="addStartDate" min="2000-01-01">
+        </div>
+        <div>
+            <p><span>*</span>收件结束日期</p>
+            <span class="check" id="errorDateTwo">请检查收件日期</span>
+            <input type="date" id="addEndDate" min="2000-01-01">
+        </div>
+        <div style="position: relative">
+            <p><span>*</span>客户姓名</p>
+            <span class="check" id="errorInfo">请检查姓名</span>
+            <input type="text" id="userName">
+        </div>
+        <div>
+            <p>手机号码</p>
+            <input type="text" id="phoneNumber" maxlength="11">
+        </div>
+        <div>
+            <p>申请状态</p>
+            <select id="querySelect">
+                <option selected="selected" value='0'>请选择</option>
+                <option value='A0'>已交申请表</option>
+                <option value='A1'>申请表已寄送</option>
+                <option value='A2'>申请表已寄达</option>
+                <option value='A3'>运营待补件</option>
+                <option value='A4'>运营待补件超时</option>
+                <option value='B1'>征信待处理</option>
+                <option value='B2'>征信待补件</option>
+                <option value='B3'>申请拒绝</option>
+                <option value='B4'>征信过件</option>
+                <option value='B5'>已发卡</option>
+                <option value='B6'>注销</option>
+            </select>
+        </div>
+        <h5 id="orange">提示：扫描录入时间、收件日期、客户姓名选填其一</h5>
+
+            <button id="query">查询</button>
+            <button id="reset">重置</button>
+
+
+    </div>
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="../../images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="../../images/marketing_on.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="../../images/myself_off.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    //加载页面
+    ;(function($){
+//        aladdin.page.config({
+//            bounce:true
+//        },function(err){
+//            if (err){
+//                aladdin.toast.show({message:err.message});
+//            }
+//        });
+
+
+        //查询
+        $('#query').on('click',function (e) {
+            required();
+           // querySelect();
+
+        });
+        $('#index').click(function () {
+            self.location='../../index.html';
+        });
+        $('#marketing').click(function () {
+            self.location='../../marketing.html';
+        });
+        $('#myself').click(function () {
+            self.location='../../myself.html';
+        });
+        //重置
+        $('#reset').on('click',function (e) {
+            location.reload();
+        });
+        //跳转到首页
+        $('#back img').on('click',function (e) {
+            self.location='../../marketing.html';
+        });
+        //获取申请状态
+    //    function querySelect() {
+    //       var querySelect = document.getElementById('querySelect');
+    //        var querySelectIndex = querySelect.selectedIndex;
+    //       var querySelectValue = querySelect.options[querySelectIndex].value;
+    //        return  querySelectValue;
+    //      // console.log(querySelectValue);
+    //    }
+        //对信息进行校验
+        function required() {
+            //获取日期
+            var entryStartDate=document.getElementById('entryStartDate').value;
+            var entryEndDate=document.getElementById('entryEndDate').value;
+            var addStartDate=document.getElementById('addStartDate').value;
+            var addEndDate=document.getElementById('addEndDate').value;
+            var querySelect = document.getElementById('querySelect').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var role_id = document.getElementById('changeUser').value;
+            //日期转换为毫秒时
+            var startOne = new Date(entryStartDate.replace(/(\d{4})(\d{2}(\d{2}))/g,'$1/$2/$3')).getTime();
+            var endOne = new Date(entryEndDate.replace(/(\d{4})(\d{2}(\d{2}))/g,'$1/$2/$3')).getTime();
+            var startTwo = new Date(addStartDate.replace(/(\d{4})(\d{2}(\d{2}))/g,'$1/$2/$3')).getTime();
+            var endTwo = new Date(addEndDate.replace(/(\d{4})(\d{2}(\d{2}))/g,'$1/$2/$3')).getTime();
+            //获取客户名称与名称校验规则
+            var userName=document.getElementById('userName').value;
+            var reg=/^[\u4e00-\u9fa5]{2,19}$/;
+            //获取隐藏提示
+            var errorInfo=document.getElementById('errorInfo');
+            var errorDateOne=document.getElementById('errorDateOne');
+            var errorDateTwo=document.getElementById('errorDateTwo');
+            //当三个选项为空时获取id为orange的标签
+            var orange = document.getElementById('orange');
+            //三选一
+            if((entryStartDate==""||entryEndDate=="")&&(addStartDate==""||addEndDate=="")&&userName==""){
+                orange.style.color = 'red';
+                orange.style.fontSize = '0.9rem';
+                setTimeout("orange.style.color='orange';orange.style.fontSize = '0.8rem'",4000);
+                return false;
+            }else {
+                //客户名称校验
+                if(userName!=''){
+                    //reg.test(userName);
+                    errorInfo.style.opacity='1';
+                    setTimeout("errorInfo.style.opacity='0'",4000);
+                    //if(reg.test(userName)==true){
+                    if(userName!=""){
+                    	   self.location='querySchedule2.html?entryStartDate='+entryStartDate
+                 		     +'&entryEndDate='+entryEndDate
+                 		     +'&addStartDate='+addStartDate
+                 		     +'&addEndDate='+addEndDate
+                 		     +'&userName='+userName
+                 		     +'&phoneNumber='+phoneNumber
+                 		     +'&querySelect='+querySelect
+                                   +'&role_id='+role_id
+                           ;
+                    }
+                    //录入日期校验
+                }else if(entryStartDate!=""&&entryEndDate!=""){
+                    if(startOne>endOne){
+                        errorDateOne.style.opacity='1';
+                        setTimeout("errorDateOne.style.opacity='0'",4000);
+                        return false;
+                    }
+//                    $.ajax({
+//                        url:,
+//                        data: ,
+//                        type: 'post',
+//                        success: function(data){
+//
+//                        },
+//                        error: function(error, data){}
+//                    });
+                    self.location='querySchedule2.html?entryStartDate='+entryStartDate
+          		     +'&entryEndDate='+entryEndDate
+          		     +'&addStartDate='+addStartDate
+          		     +'&addEndDate='+addEndDate
+          		     +'&userName='+userName
+          		     +'&phoneNumber='+phoneNumber
+          		     +'&querySelect='+querySelect
+                            +'&role_id='+role_id
+       		 ;
+                    // self.location='querySchedule2.html';
+                    //收件日期校验
+                }else if(addStartDate!=""&&addEndDate!=""){
+                    if(startTwo>endTwo){
+                        errorDateTwo.style.opacity='1';
+                        setTimeout("errorDateTwo.style.opacity='0'",4000);
+                        return false;
+                    }
+                    self.location='querySchedule2.html?entryStartDate='+entryStartDate
+       		     +'&entryEndDate='+entryEndDate
+       		     +'&addStartDate='+addStartDate
+       		     +'&addEndDate='+addEndDate
+       		     +'&userName='+userName
+       		     +'&phoneNumber='+phoneNumber
+       		     +'&querySelect='+querySelect
+                            +'&role_id='+role_id
+       		 ;
+                   // self.location='querySchedule2.html';
+                }
+            }
+        }
+    })(Zepto)
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        div div:nth-child(1){
+            height:800px;
+            background-color: #222;
+        }
+        div div:nth-child(2){
+            height:800px;
+            background-color: #fff;
+        }
+        div div:nth-child(3){
+            height:800px;
+            background-color: #f00;
+        }
+    </style>
+    <script src="iscroll-probe.js"></script>
+</head>
+<body>
+    <div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <script>
+        var scroll = new IScroll(document.body,{
+//            mouseWheel: true,
+//            scrollbars: false,
+//            bounceTime:1,
+//            bounce:true,
+//            scrollX: true, freeScroll: true
+        });
+//        scroll.scrollBy(0,100,2,'easing')
+//        scroll._init();
+        console.dir(scroll.options);
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{"status":1,"msg":"查询成功！",
+  "data": {
+    "page":2,
+    "pages":0,
+    "pageSize":10,
+    "total":37,
+    "rows": [
+      {
+        "DD_DATE":"20170105",
+        "CLIENT_NAME": "zhuyafeng1",
+        "PRODUCT_NAME": "信用卡",
+        "CLIENT_OLD_NEW_FLAG":"是",
+        "MOBILE":"1310001111",
+        "MA_SLA_CARD_FLAG":"1",
+        "APP_DATE":"20170101",
+        "CARD_ACT_DAY":"20170110",
+        "CANCELL_DATE":"20180101",
+        "FIRST_TRAN_DATE":"20170202"
+      },{
+        "DD_DATE":"20170105",
+        "CLIENT_NAME": "zhuyafeng2",
+        "PRODUCT_NAME": "信用卡",
+        "CLIENT_OLD_NEW_FLAG":"是",
+        "MOBILE":"1310001111",
+        "MA_SLA_CARD_FLAG":"1",
+        "APP_DATE":"20170101",
+        "CARD_ACT_DAY":"20170110",
+        "CANCELL_DATE":"20180101",
+        "FIRST_TRAN_DATE":"20170202"
+      },{
+        "DD_DATE":"20170105",
+        "CLIENT_NAME": "zhuyafeng3",
+        "PRODUCT_NAME": "信用卡",
+        "CLIENT_OLD_NEW_FLAG":"是",
+        "MOBILE":"1310001111",
+        "MA_SLA_CARD_FLAG":"1",
+        "APP_DATE":"20170101",
+        "CARD_ACT_DAY":"20170110",
+        "CANCELL_DATE":"20180101",
+        "FIRST_TRAN_DATE":"20170202"
+      },{
+        "DD_DATE":"20170105",
+        "CLIENT_NAME": "zhuyafeng4",
+        "PRODUCT_NAME": "信用卡",
+        "CLIENT_OLD_NEW_FLAG":"否",
+        "MOBILE":"1310001111",
+        "MA_SLA_CARD_FLAG":"1",
+        "APP_DATE":"20170101",
+        "CARD_ACT_DAY":"20170110",
+        "CANCELL_DATE":"20180101",
+        "FIRST_TRAN_DATE":"20170202"
+      },{
+        "DD_DATE":"20170105",
+        "CLIENT_NAME": "zhuyafeng5",
+        "PRODUCT_NAME": "信用卡",
+        "CLIENT_OLD_NEW_FLAG":"是",
+        "MOBILE":"1310001111",
+        "MA_SLA_CARD_FLAG":"1",
+        "APP_DATE":"20170101",
+        "CARD_ACT_DAY":"20170110",
+        "CANCELL_DATE":"20180101",
+        "FIRST_TRAN_DATE":"20170202"
+      }
+    ]
+  }
+}
+

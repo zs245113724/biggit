@@ -1,0 +1,72 @@
+{"status":1,"msg":"查询成功！",
+  "data": {
+    "page":2,
+    "pages":0,
+    "pageSize":5,
+    "total":37,
+    "rows": [
+      {
+        "CLIENT_NAME": "zhuyafeng1",
+        "BARCODE": "1038111",
+        "PRODUCT_NAME": "信用卡",
+        "REFUSE_REASON": "补件原因",
+        "CREATE_DATE": "20170101",
+        "SEND_TIME": "20170102",
+        "RECEIVE_DATE_TIME": "20170103",
+        "ACCEPT_DATE": "20170104",
+        "DD_DATE": "20170105",
+        "APPLICATION_STATUS": "申请中",
+        "MOBILE":"13010001111"
+      },{
+        "CLIENT_NAME": "zhuyafeng2",
+        "BARCODE": "1038222",
+        "PRODUCT_NAME": "信用卡",
+        "REFUSE_REASON": "补件原因",
+        "CREATE_DATE": "20170101",
+        "SEND_TIME": "20170102",
+        "RECEIVE_DATE_TIME": "20170103",
+        "ACCEPT_DATE": "20170104",
+        "DD_DATE": "20170105",
+        "APPLICATION_STATUS": "申请中",
+        "MOBILE":"13010001111"
+      },{
+        "CLIENT_NAME": "zhuyafeng3",
+        "BARCODE": "1038333",
+        "PRODUCT_NAME": "信用卡",
+        "REFUSE_REASON": "补件原因",
+        "CREATE_DATE": "20170101",
+        "SEND_TIME": "20170102",
+        "RECEIVE_DATE_TIME": "20170103",
+        "ACCEPT_DATE": "20170104",
+        "DD_DATE": "20170105",
+        "APPLICATION_STATUS": "申请中",
+        "MOBILE":"13010001111"
+      },{
+        "CLIENT_NAME": "zhuyafeng4",
+        "BARCODE": "1038444",
+        "PRODUCT_NAME": "信用卡",
+        "REFUSE_REASON": "补件原因",
+        "CREATE_DATE": "20170101",
+        "SEND_TIME": "20170102",
+        "RECEIVE_DATE_TIME": "20170103",
+        "ACCEPT_DATE": "20170104",
+        "DD_DATE": "20170105",
+        "APPLICATION_STATUS": "申请中",
+        "MOBILE":"13010001111"
+      },{
+        "CLIENT_NAME": "zhuyafeng5",
+        "BARCODE": "1038555",
+        "PRODUCT_NAME": "信用卡",
+        "REFUSE_REASON": "补件原因",
+        "CREATE_DATE": "20170101",
+        "SEND_TIME": "20170102",
+        "RECEIVE_DATE_TIME": "20170103",
+        "ACCEPT_DATE": "20170104",
+        "DD_DATE": "20170105",
+        "APPLICATION_STATUS": "申请中",
+        "MOBILE":"13010001111"
+      }
+    ]
+  }
+}
+

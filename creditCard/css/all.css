@@ -1,0 +1,69 @@
+html,body{
+    height: 100%;
+}
+a,div,ul,li,p,span,h1,h2,h3,h4,h5,h6,body,input,button,img{
+    margin: 0;
+    padding: 0;
+}
+ul,li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+body{
+    -webkit-overflow-scrolling : touch;
+}
+h1{
+    font-size: 1.6rem;
+    line-height: 4rem;
+}
+p{
+    font-size: 0.9rem;
+}
+li{
+    font-size: 0.9rem;
+}
+header{
+    position: relative;
+    background-color: #eee;
+}
+header h1{
+    text-align: center;
+    font-size: 1.3rem;
+    color: #888888;
+}
+#changeUser{
+    position: absolute;
+    right: 0.5rem;
+    top: 35%;
+    color: skyblue;
+    outline: none;
+    background: url("../images/down.png") no-repeat right center;
+    border: none;
+}
+#backImg{
+    position: absolute;
+    top: 30%;
+    left: 0.5rem;
+    width: 5%;
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #eee;
+    color: #888888;
+    z-index: 2;
+}
+footer img{
+    width: 25%;
+}
+.footerLi{
+    display: inline-block;
+    text-align: center;
+    padding: 2% 0;
+    width: 32%;
+}
+#customer,#find{color: #ddd;}

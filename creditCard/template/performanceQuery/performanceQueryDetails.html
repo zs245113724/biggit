@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <title>业绩查询明细</title>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/performanceQuery/performanceQueryDetails.css" />
+    <script src="../../js/zepto.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/aladdin.min.js"></script>
+    <script src="../../js/aladdin.phone.js"></script>
+    <style>
+
+</style>
+  <script>
+   $(document).ready(function (){
+    var clientName=decodeURI(getQueryStringByName("clientName"));
+    var mobile=getQueryStringByName("mobile");
+    var zfcard=decodeURI(getQueryStringByName("zfcard"));
+    var appdate=decodeURI(getQueryStringByName("appdate"));
+    var ddDate=getQueryStringByName("ddDate");
+    var cardactday=getQueryStringByName("cardactday");
+    var firstdate=getQueryStringByName("firstdate");
+    var cancelldate=getQueryStringByName("cancelldate");
+    $("#clientName").html(clientName);
+    $("#zfcard").html(zfcard);
+    $("#appdate").html(appdate);
+       $("#mobile").html(mobile);
+       $("#ddDate").html(ddDate);
+    $("#cardactday").html(cardactday);
+    $("#firstdate").html(firstdate);
+    $("#cancelldate").html(cancelldate);
+//       var date=new Date();
+//       var month=date.getMonth()+1;
+//       month =(month<10 ? "0"+month:month);
+//       var currentTime=date.getFullYear()+""+month+""+date.getDate();
+//       var max=4;
+//       var time=new Array();
+//       time=[appdate,ddDate,cardactday,firstdate,cancelldate];
+//       for(var n=0;n<5;n++) {
+//           if(time[n]>currentTime){
+//               max=n-1;
+//               break;
+//           }
+//       }
+//       if(max<0){
+//       } else if(max=='0'){
+//           $("#style0").attr("class","now_no");
+//           $("#0Image").attr("src","../../images/now.png");
+//       } else {
+//           for(var n=0;n<max;n++)
+//           {
+//               $("#style"+n).attr("class","ok_now");
+//               $("#"+n+"Image").attr("src","../../images/ok.png");
+//           }
+//           $("#style"+max).attr("class","now_no");
+//           $("#"+max+"Image").attr("src","../../images/now.png");
+//       }
+       var newDate = (new Date()).getTime();
+       console.log(newDate);
+       var newappdate = new Date (appdate.replace(/(\d{4})(\d{2})(\d{2})/g,'$1/$2/$3')).getTime();
+       var newddDate = new Date (ddDate.replace(/(\d{4})(\d{2})(\d{2})/g,'$1/$2/$3')).getTime();
+       var newcardactday = new Date (cardactday.replace(/(\d{4})(\d{2})(\d{2})/g,'$1/$2/$3')).getTime();
+       var newfirstdate = new Date (firstdate.replace(/(\d{4})(\d{2})(\d{2})/g,'$1/$2/$3')).getTime();
+       var newcancelldate = new Date (cancelldate.replace(/(\d{4})(\d{2})(\d{2})/g,'$1/$2/$3')).getTime();
+       alert('1......'+appdate);
+       alert('2......'+ddDate);
+       alert('3......'+cardactday);
+       alert('4......'+firstdate);
+       alert('5......'+cancelldate);
+
+       if(newappdate>newDate || appdate==""){
+
+       }else {
+           $('#style0').attr('class','now_no');
+           $('#0Image').attr('src','../../images/now.png');
+           if(newddDate>newDate || ddDate==""){
+
+           } else {
+               $('#style0').attr('class','ok_now');
+               $('#style1').attr('class','now_no');
+               $('#0Image').attr('src','../../images/ok.png');
+               $('#1Image').attr('src','../../images/now.png');
+
+               if(newcardactday>newDate || cardactday==""){
+
+               } else {
+                   $('#style0').attr('class','ok');
+                   $('#style1').attr('class','ok_now');
+                   $('#style2').attr('class','now_no');
+                   $('#0Image').attr('src','../../images/ok.png');
+                   $('#1Image').attr('src','../../images/ok.png');
+                   $('#2Image').attr('src','../../images/now.png');
+                   if(newfirstdate>newDate || firstdate==""){
+
+                   } else {
+                       $('#style0').attr('class','ok');
+                       $('#style1').attr('class','ok');
+                       $('#style2').attr('class','ok_now');
+                       $('#style3').attr('class','now_no');
+                       $('#0Image').attr('src','../../images/ok.png');
+                       $('#1Image').attr('src','../../images/ok.png');
+                       $('#2Image').attr('src','../../images/ok.png');
+                       $('#3Image').attr('src','../../images/now.png');
+                       if(newcancelldate>newDate || cancelldate==""){
+
+                       } else {
+                           $('#style0').attr('class','ok');
+                           $('#style1').attr('class','ok');
+                           $('#style2').attr('class','ok');
+                           $('#style3').attr('class','ok_now');
+                           $('#style4').attr('class','now_no');
+                           $('#0Image').attr('src','../../images/ok.png');
+                           $('#1Image').attr('src','../../images/ok.png');
+                           $('#2Image').attr('src','../../images/ok.png');
+                           $('#3Image').attr('src','../../images/ok.png');
+                           $('#4Image').attr('src','../../images/now.png');
+
+                       }
+                   }
+
+               }
+
+           }
+       }
+
+
+
+   });
+      </script>
+</head>
+<body>
+<header>
+    <div id="back">
+        <img src="../../images/back.png" id="backImg">
+    </div>
+    <h1>业务明细详情</h1>
+    <select id="changeUser">
+    </select>
+</header>
+
+<article style="height: 40rem">
+    <div id="main">
+        <div>
+            <p>客户姓名</p>
+            <h4><span id="clientName">XX</span>
+                <span id="mobile" style="display:none"></span>
+                <img  id="phone" src='../../images/phone.png'></h4>
+        </div>
+        <div>
+            <p>主附卡</p>
+            <h4 id="zfcard">XX</h4>
+        </div>
+    </div>
+    <ul>
+        <!--  <li><div><span class="ok"></span><img src="../../images/ok.png"></div>【申请】进件日期：<span id="appdate"></span></li>
+        <li><div><span class="ok_now"></span><img src="../../images/ok.png"></div>【发卡】发卡日期：<span id="ddDate"></span></li>
+        <li><div><span class="now_no"></span><img src="../../images/now.png"></div>【激活】激活日期：<span id="cardactday"></span></li>
+        <li><div><span class="no_no"></span><img src="../../images/no.png"></div>【使用】使用日期：<span id="firstdate"></span></li>
+        <li><div><img src="../../images/no.png"></div>【注销】注销日期：<span id="cancelldate"></span></li> -->
+        <li><div><span id="style0"  class="no_no"></span><img id="0Image" src="../../images/no.png"></div>【申请】进件日期：<span id="appdate"></span></li>
+        <li><div><span id ="style1" class="no_no"></span><img id="1Image" src="../../images/no.png"></div>【发卡】发卡日期：<span id="ddDate"></span></li>
+        <li><div><span id ="style2" class="no_no"></span><img id="2Image"  src="../../images/no.png"></div>【激活】激活日期：<span id="cardactday"></span></li>
+        <li><div><span id ="style3" class="no_no"></span><img id="3Image" src="../../images/no.png"></div>【使用】使用日期：<span id="firstdate"></span></li>
+        <li><div><span id ="style4" class="no_no"></span><img id="4Image"  src="../../images/no.png"></div>【注销】注销日期：<span id="cancelldate"></span></li>
+    </ul>
+
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="../../images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="../../images/marketing_on.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="../../images/myself_off.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    ;(function($){
+        $('#back img').on('click',function (e) {
+            self.location='performanceQueryList.html';
+        });
+        $('#index').click(function () {
+            self.location='../../index.html';
+        });
+        $('#marketing').click(function () {
+            self.location='../../marketing.html';
+        });
+        $('#myself').click(function () {
+            self.location='../../myself.html';
+        });
+
+        $('#phone').on('click',function (e) {
+            var number=$('#mobile').html();
+            aladdin.phone.call({number:number},function (err){
+                if (err) {
+                } else {
+                }
+            });
+        });
+
+    })(Zepto)
+
+
+</script>
+</body>
+</html>

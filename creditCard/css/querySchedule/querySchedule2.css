@@ -1,0 +1,23 @@
+#cardTable,#mytable{width: 100%;}
+#cardTable tr,#mytable tr{
+    width:100%;
+    text-align: center;
+    line-height: 3rem;
+    font-size: 1rem;
+    border-bottom: 1px solid #eeeeee;
+    display: inline-block;
+}
+#cardTable tr td,#mytable tr td{
+    display: inline-block;
+    width: 23.7%;
+    padding: 0;
+}
+#cardTableTr{
+    color:#aaaaaa;
+}
+#mytable img{
+    vertical-align: middle;
+}
+#marketing{
+    color: skyblue;
+}

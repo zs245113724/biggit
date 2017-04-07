@@ -1,0 +1,53 @@
+.goDiv{
+    border-bottom: 1px solid #eeeeee;
+    height: 3rem;
+    padding: 0 0.5rem;
+}
+#main div p{
+    float: left;
+    color: #aaaaaa;
+    line-height: 3rem;
+}
+#main div img{
+    float: right;
+    padding-top: 0.9rem;
+    width: 3%;
+}
+article ul{
+    border-left: 1px solid #000;
+    margin: 2rem 0 0 10%;
+}
+article ul li{
+    margin:0 0 1.5rem 1rem;
+}
+
+#customerCard, #querySchedule, #performanceQuery, #statisticalQuery, #creditCardApp, #qrCode{
+    /*display: none;*/
+}
+.swiper-container {
+    width: 100%;
+    height: 30%;
+
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+#myself{
+    color: skyblue;
+}

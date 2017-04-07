@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>业绩统计列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/performanceQuery/performanceQueryDetails.css" />
+    <script src="../../js/zepto.min.js"></script>
+    <script src="../../js/common.js"></script>
+     <script>
+    $(document).ready(function (){ 
+    	var entryMonth=getQueryStringByName("entryMonth");
+        var annualFee=getQueryStringByName("annualFee");
+        var salesCode=getQueryStringByName("salesCode");
+        var salesCompanyCode=getQueryStringByName("salesCompanyCode");
+        var ticket=window.localStorage.getItem("ticket");
+        var deviceId=window.localStorage.getItem("deviceId");
+        var role_id=getQueryStringByName("role_id");
+        var page_num=1;
+        var page_size=10;
+
+      
+  //ajax数据请求    
+   var date={
+              "ticket":ticket,
+             "deviceId":deviceId,
+             "role_id":role_id,
+              "query_month":entryMonth,
+      		  "annual_fee_flag":annualFee,
+      		  "employee_id":salesCode,
+              "page_num":page_num,
+              "page_size":page_size,
+      		  "unit_no":salesCompanyCode
+      		  };
+      $.ajax({
+          url:"http://iclient-app-u1.pingan.com.cn:9080/iclientapp/CreditCardForBankerA/checkAchievementStatistics?",
+		dataType: 'json',
+		data : date,
+		type:"post",
+		success: function(data) {
+			//返回数据成功
+			if(data.status=='1')
+	  		  {
+                  for(var n=0;n<data.data.rows.length;n++) {
+
+                      $("#receiveCount").html(data.data.rows[n].RECEIVE_SUM);
+                      $("#inCount").html(data.data.rows[n].IN_SUM);
+                      $("#passCount").html(data.data.rows[n].PASS_SUM);
+                      $("#rejectCount").html(data.data.rows[n].CANCEL_SUM);
+                      $("#sendCount").html(data.data.rows[n].CARD_SUM);
+                      $("#salesCount").html(data.data.rows[n].NEW_CONSUMER_SUM);
+                      $("#feeCount").html(data.data.rows[n].FEED_CARD_SUM);
+                      $("#passRate").html(data.data.rows[n].PASS_RATE);
+                      $("#firstRate").html(data.data.rows[n].CONSUMER_RATE);
+                      $("#offRate").html(data.data.rows[n].CANCEL_RATE);
+                  }
+	  		  }
+	      else
+	    	  {
+	    	  }
+		},
+		error:function(){
+			 alert("请求错误");
+		}
+	});  
+  });
+   </script>
+</head>
+<body>
+<header>
+    <div id="back">
+        <img src="../../images/back.png" id="backImg">
+    </div>
+    <h1>业绩统计</h1>
+    <select id="changeUser">
+    </select>
+</header>
+<article>
+    <div id="main" style="height: 45rem;">
+     <div>
+          <p>收件量</p>
+          <h4 id="receiveCount"></h4>
+      </div>
+      <div>
+          <p>进件量</p>
+          <h4 id="inCount"></h4>
+      </div>
+      <div>
+          <p>过件量</p>
+          <h4 id='passCount'></h4>
+      </div>
+      <div>
+          <p>退件量</p>
+          <h4 id="rejectCount"></h4>
+      </div>
+      <div>
+          <p>发卡量</p>
+          <h4 id="sendCount"></h4>
+      </div>
+      <div>
+          <p>销售新户量</p>
+          <h4 id="salesCount"></h4>
+      </div>
+      <div>
+          <p>缴纳年费卡量</p>
+          <h4 id="feeCount"></h4>
+      </div>
+      <div>
+          <p>过件率</p>
+          <h4 id="passRate"></h4>
+      </div>
+      <div>
+          <p>首刷率</p>
+          <h4 id="firstRate"></h4>
+      </div>
+      <div>
+          <p>注销率</p>
+          <h4 id="offRate"></h4>
+      </div>
+    </div>
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="../../images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="../../images/marketing_on.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="../../images/myself_off.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    ;(function($){
+        $('#back img').on('click',function (e) {
+            self.location='statisticalQuery.html';
+        });
+        $('#index').click(function () {
+            self.location='../../index.html';
+        });
+        $('#marketing').click(function () {
+            self.location='../../marketing.html';
+        });
+        $('#myself').click(function () {
+            self.location='../../myself.html';
+        });
+    })(Zepto)
+</script>
+</body>
+</html>

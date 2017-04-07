@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>客户持卡查询</title>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/customerCard/customerCard.css" />
+    <script src="../../js/zepto.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/aladdin.min.js"></script>
+    <script src="../../js/aladdin.aikeplatform.js"></script>    
+</head>
+<body>
+<header>
+    <div id="back">
+        <img src="../../images/back.png" id="backImg">
+    </div>
+    <h1>客户持卡查询</h1>
+    <select id="changeUser">
+      <!--  <option selected="selected">直销业务员</option>
+        <option>主任</option>
+        <option>分行专员</option>
+        <option>主管</option>
+        <option>业务员</option>
+        <option>寿险专员</option> -->
+    </select>
+</header>
+<article>
+    <div id="main">
+        <div>
+            <p><span>*</span>身份证号码</p>
+            <span class="check" id="errorHairpinMonth">请检查身份证号</span>
+            <input type="text" id="idNumber" placeholder="请输入身份证号" maxlength="18">
+        </div>
+            <button id="query">查询</button>
+    </div>
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="../../images/index_off.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="../../images/marketing_on.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="../../images/myself_off.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    //加载页面
+    ;(function($){
+        //查询
+        $('#query').on('click',function (e) {
+            hairpinMonth();
+        });
+        $('#index').click(function () {
+            self.location='../../index.html';
+        });
+        $('#marketing').click(function () {
+            self.location='../../marketing.html';
+        });
+        $('#myself').click(function () {
+            self.location='../../myself.html';
+        });
+        //跳转到首页
+        $('#back img').on('click',function (e) {
+            self.location='../../marketing.html';
+        });
+        //对信息进行校验
+        function hairpinMonth() {
+            //获取
+            var global_id=document.getElementById('idNumber').value;
+            var role_id=$("#changeUser").val();
+            var errorHairpinMonth=document.getElementById('errorHairpinMonth');
+            var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if(global_id==""||reg.test(global_id)==false){
+                errorHairpinMonth.style.opacity='1';
+                setTimeout("errorHairpinMonth.style.opacity='0'",4000);
+                return false;
+            }else {
+                self.location='customerCardInquiry.html?global_id='+global_id+"&role_id="+role_id;
+            }
+        }
+    })(Zepto)
+
+
+</script>
+</body>
+</html>
