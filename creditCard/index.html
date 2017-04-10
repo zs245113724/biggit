@@ -21,7 +21,7 @@
     <div id="back">
         <img src="images/back.png" id="backImg">
     </div>
-    <h1>首页111</h1>
+    <h1>首页</h1>
 </header>
 
 <div class="swiper-container">
@@ -224,6 +224,7 @@
                 }
             }
         }
+        if(localStorage.getItem("roles")) getUser(localStorage.getItem("roles").split(','));
         $(document).ready(function (){
             aladdin.aike_tool.getTicketAndDeviceId(
                     function (ticket,deviceId) {
@@ -247,6 +248,7 @@
                 data : date,
                 type:"post",
                 success: function(data) {
+
                     //返回数据成功
                     if(data.status=='1')
                     {
@@ -255,6 +257,7 @@
                             //alert(data.data[n].roleId);
                             roles[n] = data.data[n].roleId;
                         }
+
                         getUser(roles);
                         window.localStorage.setItem('roles',roles);
                     }

@@ -22,7 +22,7 @@
 }
 
 #customerCard, #querySchedule, #performanceQuery, #statisticalQuery, #creditCardApp, #qrCode{
-    /*display: none;*/
+    display: none;
 }
 .swiper-container {
     width: 100%;
