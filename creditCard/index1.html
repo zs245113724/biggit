@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>信用卡E行销</title>
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <script src="js/zepto.min.js"></script>
+    <script src="js/aladdin.min.js"></script>
+    <script src="js/aladdin.aikeplatform.js"></script>
+    <script src="js/swiper.min.js"></script>
+
+
+
+</head>
+<body>
+
+<header>
+    <div id="back">
+        <img src="images/back.png" id="backImg">
+    </div>
+    <h1>首页</h1>
+</header>
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="images/188.jpg" alt="" id="firstClick"></div>
+        <div class="swiper-slide"><img src="images/carCard.jpg" alt="" id="secondClick"></div>
+        <div class="swiper-slide"><img src="images/younika.png" alt="" id="thirdClick"></div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+    <!--<div class="swiper-button-next"></div>-->
+    <!--<div class="swiper-button-prev"></div>-->
+</div>
+
+<article>
+    <div id="main">
+        <div id="mainBox">
+            <div id="mainBoxTop">
+                <div class="goDiv borderRight borderBottom" id="customerCard">
+                    <img src="images/customerCard.png" alt="" class="mainImg">
+                    <p>客户持卡情况查询</p>
+                </div>
+                <div class="goDiv borderRight borderBottom" id="querySchedule">
+                    <img src="images/querySchedule.png" alt="" class="mainImg">
+                    <p>信用卡进度查询</p>
+                </div>
+                <div class="goDiv borderBottom" id="performanceQuery">
+                    <img src="images/performanceQuery.png" alt="" class="mainImg">
+                    <p>业绩查询-明细类</p>
+                </div>
+            </div>
+            <div id="mainBoxBottom">
+                <div class="goDiv borderRight" id="statisticalQuery">
+                    <img src="images/statisticalQuery.png" alt="" class="mainImg">
+                    <p>业绩查询-统计类</p>
+                </div>
+               <div class="goDiv borderRight">
+                   <img src="" alt="">
+                   <p></p>
+                </div>
+                <div class="goDiv">
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</article>
+<footer>
+    <ul>
+        <li class="footerLi" id="index">
+            <div><a href="javascript:void(0)"><img src="images/index_on.png" alt=""></a></div>
+            <div>首页</div>
+        </li>
+        <li class="footerLi" id="marketing">
+            <div><a href="javascript:void(0)"><img src="images/marketing_off.png" alt=""></a></div>
+            <div>营销</div>
+        </li>
+        <li class="footerLi" id="myself">
+            <div><a href="javascript:void(0)"><img src="images/myself_off.png" alt=""></a></div>
+            <div>我的</div>
+        </li>
+    </ul>
+</footer>
+<script>
+    ;(function($){
+        aladdin.header.config({
+            title:'信用卡',
+            backgroundColor:'#F37937',
+            color:'#FFFFFF',
+            fontSize:'20px',
+            leftButtonVisible:false,
+//            leftButtonText:'',
+//            leftButtonIcon:'',
+//            leftButtonCallback:function (){aladdin.navigator.back()},
+            rightButtonVisible:false
+        });
+//        aladdin.page.config({
+//           bounce:true,
+//            swipe:true,
+//            backgroundColor:'#FFFFFF'
+//        },function (err) {
+//
+//        });
+
+        $('#customerCard').on('click',function (e) {
+            self.location='./template/customerCard/customerCard.html';
+        });
+        $('#querySchedule').on('click',function (e) {
+            self.location='./template/querySchedule/querySchedule.html';
+        });
+        $('#performanceQuery').on('click',function (e) {
+            self.location='./template/performanceQuery/performanceQuery.html';
+        });
+        $('#statisticalQuery').on('click',function (e) {
+            self.location='./template/statisticalQuery/statisticalQuery.html';
+        });
+        $('#index').click(function () {
+
+        });
+        $('#marketing').click(function () {
+            self.location='./marketing.html';
+        });
+        $('#myself').click(function () {
+            self.location='./myself.html';
+        });
+        $('#firstClick').click(function ()
+        {
+            aladdin.navigator.forward({
+                title:'188大红包',
+                url:'https://m.pingan.com/c3/xinyongka/huodong/khb/index.html',
+                type:'webapp',
+                header:{
+                    visible:true,
+                    config:{
+                        backgroundColor:'#ddd'
+                    }
+                }
+            },function(err){
+                if (err){
+                    aladdin.toast.show({message:err.message});
+                }
+            });
+        });
+        $('#secondClick').click(function ()
+        {
+            aladdin.navigator.forward({
+                title:'车主信用卡',
+                url:'https://www.pinganad.com/car/index_3.html',
+                type:'webapp',
+                header:{
+                    visible:true,
+                    config:{
+                        backgroundColor:'#ddd'
+                    }
+                }
+            },function(err){
+                if (err){
+                    aladdin.toast.show({message:err.message});
+                }
+            });
+        });
+        $('#thirdClick').click(function ()
+        {
+            aladdin.navigator.forward({
+                title:'由你信用卡',
+                url:'https://m.pingan.com/c3/xinyongka/huodong/paynkjs/index.html',
+                type:'webapp',
+                header:{
+                    visible:true,
+                    config:{
+                        backgroundColor:'#ddd'
+                    }
+                }
+            },function(err){
+                if (err){
+                    aladdin.toast.show({message:err.message});
+                }
+            });
+        });
+
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 3000,
+            autoplayDisableOnInteraction: false
+        });
+    })(Zepto);
+
+        function getUser(user) {
+            for (var i = 0; i < user.length; i++) {
+
+                if (user[i] == '90900019') {
+                    $('#customerCard').css({display: 'block'});
+                    $('#creditCardApp').css({display: 'block'});
+                }
+                else if (user[i] == '90900018') {
+                    $('#customerCard').css({display: 'block'});
+                    $('#creditCardApp').css({display: 'block'});
+                }
+                else if (user[i] == '90900013') {
+
+                    $('#customerCard').css({display: 'block'});
+                    $('#creditCardApp').css({display: 'block'});
+                    $('#qrCode').css({display: 'block'});
+                } else if (user[i] == '90900012') {
+                    $('#customerCard').css({display: 'block'});
+                    $('#querySchedule').css({display: 'block'});
+                    $('#performanceQuery').css({display: 'block'});
+                    $('#statisticalQuery').css({display: 'block'});
+                    $('#creditCardApp').css({display: 'block'});
+                    $('#qrCode').css({display: 'block'});
+                }
+            }
+        }
+        if(localStorage.getItem("roles")) getUser(localStorage.getItem("roles").split(','));
+        $(document).ready(function (){
+            aladdin.aike_tool.getTicketAndDeviceId(
+                    function (ticket,deviceId) {
+                        window.localStorage.setItem("ticket",ticket);
+                        window.localStorage.setItem("deviceId",deviceId);
+                    }
+            );
+
+            //从行员A获取ticket、设备号，存到localStorage
+            var ticket=window.localStorage.getItem("ticket");
+            var deviceId=window.localStorage.getItem('deviceId');
+            //带着ticket及设备ID请求爱客,返回用户角色
+            var date={
+                "ticket":ticket,
+                "deviceId":deviceId
+            };
+            console.log(date.ticket+":"+date.deviceId);
+            $.ajax({
+                url:"http://iclient-app-u1.pingan.com.cn:9080/iclientapp/CreditCardForBankerA/UserRoleQuery?",
+                dataType: 'json',
+                data : date,
+                type:"post",
+                success: function(data) {
+
+                    //返回数据成功
+                    if(data.status=='1')
+                    {
+                        var roles=new Array();
+                        for(var n=0;n<data.data.length;n++) {
+                            //alert(data.data[n].roleId);
+                            roles[n] = data.data[n].roleId;
+                        }
+
+                        getUser(roles);
+                        window.localStorage.setItem('roles',roles);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                },
+                error:function(){
+                    alert("请求失败");
+                    return;
+                }
+            });
+
+
+
+      });
+
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    }, false)
+
+</script>
+</body>
+</html>
